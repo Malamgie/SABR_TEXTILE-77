@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabr Textile | Shop All Products</title>
+    <!-- Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons --><script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #1a1a1a;
+        }
+        .text-accent-gold { color: #d99a4e; }
+        .bg-accent-gold { background-color: #d99a4e; }
+        .border-accent-gold { border-color: #d99a4e; }
+        .bg-primary-dark { background-color: #1a1a1a; }
+        .text-primary-dark { color: #1a1a1a; }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Sidebar (Mobile Nav) */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .sidebar-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Product Card */
+        .product-card .secondary-img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .product-card:hover .secondary-img {
+            opacity: 1;
+        }
+        .product-card .add-to-cart-btn {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .product-card:hover .add-to-cart-btn,
+        .product-card-mobile .add-to-cart-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Filter Accordion */
+        .filter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .filter-accordion.open .filter-content {
+            max-height: 500px; /* Sufficiently large value */
+        }
+        .filter-accordion.open .filter-toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Utility Sidebar (Mobile Nav & Cart Placeholder) -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <aside id="utility-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 p-6 sidebar overflow-y-auto">
+        <div class="flex justify-end mb-8">
+            <button id="close-sidebar-btn">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600 hover:text-black"></i>
+            </button>
+        </div>
+        <nav class="space-y-6">
+            <!-- Main Mobile Navigation -->
+            <a href="index.html" class="block text-lg font-medium text-gray-700 hover:text-black">Home</a>
+            <div>
+                <button id="mobile-shop-toggle" class="w-full flex justify-between items-center text-lg font-medium text-gray-700 hover:text-black">
+                    <span>Shop</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                </button>
+                <div id="mobile-shop-menu" class="pl-4 mt-2 space-y-2 hidden">
+                    <h4 class="font-bold text-primary-dark mb-2 text-sm uppercase">Clothing</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-accent-gold block">All Clothing</a></li>
+                        <li><a href="#" class="hover:text-accent-gold block">Kaftan</a></li>
+                        <li><a href="#" class="hover:text-accent-gold block">Agbada</a></li>
+                    </ul>
+                    <h4 class="font-bold text-primary-dark mb-2 mt-4 text-sm uppercase">Caps</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-accent-gold block">All Caps</a></li>
+                        <li><a href="#" class="hover:text-accent-gold block">Dara</a></li>
+                        <li><a href="#" class="hover:text-accent-gold block">Zannah</a></li>
+                    </ul>
+                </div>
+            </div>
+            <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-black">Contact Us</a>
+
+            <!-- Utility Links Separator -->
+            <div class="border-t pt-6">
+                <a href="#" class="block text-lg font-medium text-gray-700 hover:text-black">My Account</a>
+                <a href="#" class="block text-lg font-medium text-gray-700 hover:text-black">Login</a>
+            </div>
+            <div class="border-t pt-6">
+                <h3 class="text-sm font-semibold uppercase text-gray-500 mb-3">Currency</h3>
+                <ul>
+                    <li class="flex justify-between items-center text-gray-800 font-medium">
+                        NGN - Nigerian Naira
+                        <i data-lucide="check" class="w-5 h-5 text-accent-gold"></i>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-white/95 backdrop-blur-sm shadow-sm z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-bold tracking-wider uppercase text-primary-dark">SABR Textile</a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-wider">
+                <a href="index.html" class="text-gray-600 hover:text-black">Home</a>
+                <div class="relative group">
+                    <a href="shop.html" class="text-gray-900 flex items-center border-b-2 border-primary-dark">
+                        Shop <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 mt-4 w-96 shadow-2xl bg-white border border-gray-100 rounded-lg p-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-primary-dark mb-3">Clothing</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li><a href="#" class="hover:text-accent-gold">All Clothing</a></li>
+                                    <li><a href="#" class="hover:text-accent-gold">Kaftan</a></li>
+                                    <li><a href="#" class="hover:text-accent-gold">Agbada</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark mb-3">Caps & Accessories</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li><a href="#" class="hover:text-accent-gold">All Caps</a></li>
+                                    <li><a href="#" class="hover:text-accent-gold">Dara</a></li>
+                                    <li><a href="#" class="hover:text-accent-gold">Zannah</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="contact.html" class="text-gray-600 hover:text-black">Contact Us</a>
+            </nav>
+
+            <!-- Utility Icons -->
+            <div class="flex items-center space-x-6">
+                <a href="#" class="text-green-500 hover:text-green-600 hidden md:block">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="flex items-center text-gray-600 hover:text-black">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="ml-1 text-sm font-medium">(0)</span>
+                </a>
+                <button id="open-sidebar-btn" class="text-gray-600 hover:text-black">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-white py-12 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-4xl font-extrabold text-primary-dark">Shop All Products</h1>
+                    <nav class="text-sm hidden sm:block">
+                        <a href="index.html" class="text-gray-500 hover:text-primary-dark">Home</a>
+                        <span class="mx-2 text-gray-400">/</span>
+                        <span class="text-primary-dark font-medium">Shop</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Listing Area -->
+        <section class="py-12 md:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    
+                    <!-- Desktop Filter Sidebar -->
+                    <aside class="w-full md:w-64 md:sticky md:top-28 p-4 bg-white rounded-lg shadow-lg md:shadow-none md:bg-transparent">
+                        <h3 class="text-xl font-bold text-primary-dark mb-6 border-b pb-2 hidden md:block">Filter Products</h3>
+
+                        <div class="space-y-6">
+                            <!-- Category Filter -->
+                            <div class="filter-accordion open" id="category-filter">
+                                <button class="w-full flex justify-between items-center py-2 text-lg font-semibold text-primary-dark border-b md:border-b-0">
+                                    <span>Category</span>
+                                    <i data-lucide="chevron-up" class="w-5 h-5 transition-transform filter-toggle-icon"></i>
+                                </button>
+                                <div class="filter-content pt-3">
+                                    <ul class="space-y-2 text-sm">
+                                        <li><input type="checkbox" id="cat-kaftan" class="mr-2 accent-accent-gold"><label for="cat-kaftan" class="text-gray-600">Kaftan (8)</label></li>
+                                        <li><input type="checkbox" id="cat-agbada" class="mr-2 accent-accent-gold"><label for="cat-agbada" class="text-gray-600">Agbada (3)</label></li>
+                                        <li><input type="checkbox" id="cat-caps" class="mr-2 accent-accent-gold"><label for="cat-caps" class="text-gray-600">Caps (5)</label></li>
+                                        <li><input type="checkbox" id="cat-shoes" class="mr-2 accent-accent-gold"><label for="cat-shoes" class="text-gray-600">Shoes (4)</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Color Filter -->
+                            <div class="filter-accordion" id="color-filter">
+                                <button class="w-full flex justify-between items-center py-2 text-lg font-semibold text-primary-dark border-b md:border-b-0">
+                                    <span>Color</span>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform filter-toggle-icon"></i>
+                                </button>
+                                <div class="filter-content pt-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-accent-gold transition" style="background-color: #1a1a1a;" title="Black"></button>
+                                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-accent-gold transition" style="background-color: #FFFFFF; border-color: #ddd;" title="White"></button>
+                                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-accent-gold transition" style="background-color: #5D4037;" title="Brown"></button>
+                                        <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-accent-gold transition" style="background-color: #616247;" title="Olive"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Price Range Filter -->
+                            <div class="filter-accordion" id="price-filter">
+                                <button class="w-full flex justify-between items-center py-2 text-lg font-semibold text-primary-dark border-b md:border-b-0">
+                                    <span>Price Range</span>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform filter-toggle-icon"></i>
+                                </button>
+                                <div class="filter-content pt-3">
+                                    <input type="range" min="10000" max="500000" value="500000" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-accent-gold">
+                                    <p class="text-sm mt-2 text-gray-600">Up to <span id="price-value">₦500,000</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </aside>
+
+                    <!-- Product Grid -->
+                    <div class="flex-1">
+                        <!-- Sorting and Results Bar -->
+                        <div class="flex justify-between items-center pb-4 border-b border-gray-200 mb-6">
+                            <p class="text-sm text-gray-600"><span id="result-count">20</span> Products Found</p>
+                            <div class="flex items-center space-x-4">
+                                <label for="sort-by" class="text-sm text-gray-600 hidden sm:block">Sort by:</label>
+                                <select id="sort-by" class="bg-white border border-gray-300 rounded-md text-sm p-2 focus:ring-accent-gold focus:border-accent-gold">
+                                    <option value="featured">Featured</option>
+                                    <option value="price-asc">Price: Low to High</option>
+                                    <option value="price-desc">Price: High to Low</option>
+                                    <option value="newest">Newest Arrivals</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Product Grid Container -->
+                        <div id="products-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Products will be loaded here by JavaScript -->
+                        </div>
+                        
+                        <!-- Pagination Placeholder -->
+                        <div class="mt-12 flex justify-center space-x-2">
+                            <button class="px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-100"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                            <button class="px-3 py-1 text-sm rounded-md bg-primary-dark text-white font-medium">1</button>
+                            <button class="px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-100">2</button>
+                            <button class="px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-100">3</button>
+                            <button class="px-3 py-1 text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-100"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-gray-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">SABR Textile</h3>
+                <p class="text-sm">Premium clothing brand in Northern Nigeria. We offer quality products from amazing caps, fabulous Kaftans to classy and comfortable shoes.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Customer Service</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent-gold">Help & Contact Us</a></li>
+                    <li><a href="#" class="hover:text-accent-gold">Shipping Policy</a></li>
+                    <li><a href="#" class="hover:text-accent-gold">Returns & Refunds</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-accent-gold">About Us</a></li>
+                    <li><a href="#" class="hover:text-accent-gold">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-accent-gold">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="facebook"></i></a>
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+            &copy; 2024 Sabr Textile. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
+
+            // --- Sidebar Logic (Mobile Nav) ---
+            const sidebar = document.getElementById('utility-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            const openBtn = document.getElementById('open-sidebar-btn');
+            const closeBtn = document.getElementById('close-sidebar-btn');
+
+            const toggleSidebar = () => {
+                sidebar.classList.toggle('open');
+                backdrop.classList.toggle('hidden');
+            };
+
+            openBtn.addEventListener('click', toggleSidebar);
+            closeBtn.addEventListener('click', toggleSidebar);
+            backdrop.addEventListener('click', toggleSidebar);
+
+            // --- Mobile Shop Dropdown Logic ---
+            const mobileShopToggle = document.getElementById('mobile-shop-toggle');
+            const mobileShopMenu = document.getElementById('mobile-shop-menu');
+            if (mobileShopToggle && mobileShopMenu) {
+                mobileShopToggle.addEventListener('click', () => {
+                    mobileShopMenu.classList.toggle('hidden');
+                    mobileShopToggle.querySelector('i').classList.toggle('rotate-180');
+                });
+            }
+
+            // --- Filter Accordion Logic ---
+            document.querySelectorAll('.filter-accordion button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const accordion = e.currentTarget.closest('.filter-accordion');
+                    // Only run for mobile devices (when the filter is visible on mobile)
+                    if (window.innerWidth < 768) {
+                        accordion.classList.toggle('open');
+                    }
+                });
+            });
+
+            // Set initial state for desktop filters (all open)
+            if (window.innerWidth >= 768) {
+                document.querySelectorAll('.filter-accordion').forEach(accordion => {
+                    accordion.classList.add('open');
+                });
+            }
+
+
+            // --- Price Range Input Logic ---
+            const priceRange = document.querySelector('input[type="range"]');
+            const priceValueSpan = document.getElementById('price-value');
+            if (priceRange) {
+                priceRange.addEventListener('input', function() {
+                    priceValueSpan.textContent = '₦' + new Intl.NumberFormat().format(this.value);
+                });
+            }
+            
+
+            // --- Product Data and Rendering ---
+            const productsGrid = document.getElementById('products-grid');
+            const mockProducts = [
+                { id: 'sabr-040', name: 'Wamball Code 040', price: 260000, img1: 'https://placehold.co/400x400/343a40/f8f9fa?text=Kaftan+040+A', img2: 'https://placehold.co/400x400/212529/f8f9fa?text=Kaftan+040+B' },
+                { id: 'sabr-042', name: 'Wamball Code 042', price: 340000, img1: 'https://placehold.co/400x400/2C3E50/ECF0F1?text=Kaftan+042+A', img2: 'https://placehold.co/400x400/1C2833/ECF0F1?text=Kaftan+042+B' },
+                { id: 'sabr-020', name: 'Wamball Code 020', price: 210000, img1: 'https://placehold.co/400x400/5D6D7E/EAECEE?text=Kaftan+020+A', img2: 'https://placehold.co/400x400/424949/EAECEE?text=Kaftan+020+B' },
+                { id: 'sabr-041', name: 'Wamball Code 041', price: 340000, img1: 'https://placehold.co/400x400/2C3E50/ECF0F1?text=Kaftan+041+A', img2: 'https://placehold.co/400x400/1C2833/ECF0F1?text=Kaftan+041+B' },
+                { id: 'sabr-055', name: 'The Royal Blue Kaftan', price: 450000, img1: 'https://placehold.co/400x400/003366/FFFFFF?text=Blue+Kaftan+A', img2: 'https://placehold.co/400x400/002244/FFFFFF?text=Blue+Kaftan+B' },
+                { id: 'sabr-sandal', name: 'Leather Huarache Sandal', price: 85000, img1: 'https://placehold.co/400x400/7a523a/FFFFFF?text=Sandal+Tan+A', img2: 'https://placehold.co/400x400/964B00/FFFFFF?text=Sandal+Tan+B' },
+                { id: 'sabr-agbada', name: 'Prestige White Agbada', price: 550000, img1: 'https://placehold.co/400x400/EEEEEE/1a1a1a?text=Agbada+White+A', img2: 'https://placehold.co/400x400/DDDDDD/1a1a1a?text=Agbada+White+B' },
+                { id: 'sabr-cap-dara', name: 'Dara Cap - Black', price: 25000, img1: 'https://placehold.co/400x400/1a1a1a/FFFFFF?text=Cap+Black+A', img2: 'https://placehold.co/400x400/333333/FFFFFF?text=Cap+Black+B' },
+                { id: 'sabr-090', name: 'Crimson Linen Kaftan', price: 310000, img1: 'https://placehold.co/400x400/CC0000/FFFFFF?text=Kaftan+Red+A', img2: 'https://placehold.co/400x400/990000/FFFFFF?text=Kaftan+Red+B' },
+                { id: 'sabr-091', name: 'Emerald Green Agbada', price: 620000, img1: 'https://placehold.co/400x400/006400/FFFFFF?text=Agbada+Green+A', img2: 'https://placehold.co/400x400/004000/FFFFFF?text=Agbada+Green+B' },
+                { id: 'sabr-shoe-oxford', name: 'Elegant Cover Shoe', price: 120000, img1: 'https://placehold.co/400x400/333333/FFFFFF?text=Cover+Shoe+A', img2: 'https://placehold.co/400x400/1a1a1a/FFFFFF?text=Cover+Shoe+B' },
+                { id: 'sabr-cap-zannah', name: 'Zannah Cap - Navy', price: 22000, img1: 'https://placehold.co/400x400/000080/FFFFFF?text=Cap+Navy+A', img2: 'https://placehold.co/400x400/000060/FFFFFF?text=Cap+Navy+B' },
+            ];
+            
+            // Function to format Nigerian Naira
+            const formatNaira = (amount) => {
+                return '₦' + new Intl.NumberFormat('en-NG', { minimumFractionDigits: 0 }).format(amount);
+            };
+
+            function createProductCard(product) {
+                const isMobile = window.innerWidth < 768;
+                const card = document.createElement('a');
+                card.href = 'product-details.html?id=' + product.id; // Link to the details page
+                card.className = `product-card bg-white rounded-lg shadow-md hover:shadow-xl transition overflow-hidden group ${isMobile ? 'product-card-mobile' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${product.img1}" alt="${product.name} View 1" class="w-full h-full object-cover aspect-square">
+                        <img src="${product.img2}" alt="${product.name} View 2" class="absolute inset-0 w-full h-full object-cover aspect-square secondary-img">
+                        
+                        <!-- Add to Cart Button -->
+                        <div class="add-to-cart-btn absolute bottom-0 left-0 w-full bg-primary-dark/90 text-white py-3 text-sm font-semibold flex items-center justify-center hover:bg-accent-gold transition">
+                             <i data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> Quick View
+                        </div>
+                    </div>
+                    <div class="p-4 text-left">
+                        <p class="text-sm text-gray-500">${product.name}</p>
+                        <p class="text-lg font-bold text-primary-dark">${formatNaira(product.price)}</p>
+                    </div>
+                `;
+
+                // Re-initialize icons for the new button
+                lucide.createIcons({
+                    nodes: [card.querySelector('.add-to-cart-btn i')]
+                });
+                
+                return card;
+            }
+            
+            // Initial render
+            function renderProducts(products) {
+                productsGrid.innerHTML = '';
+                document.getElementById('result-count').textContent = products.length;
+                products.forEach(p => productsGrid.appendChild(createProductCard(p)));
+            }
+            renderProducts(mockProducts);
+
+            // Placeholder Sorting Logic (simple in-memory sort)
+            document.getElementById('sort-by').addEventListener('change', (e) => {
+                const sortBy = e.target.value;
+                let sortedProducts = [...mockProducts];
+
+                switch(sortBy) {
+                    case 'price-asc':
+                        sortedProducts.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-desc':
+                        sortedProducts.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'newest':
+                        // Placeholder for real date sort
+                        sortedProducts.reverse(); 
+                        break;
+                    case 'featured':
+                    default:
+                        // No change
+                        break;
+                }
+                renderProducts(sortedProducts);
+            });
+            
+            // Handle mobile class on resize
+            window.addEventListener('resize', () => {
+                const isMobile = window.innerWidth < 768;
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.classList.toggle('product-card-mobile', isMobile);
+                });
+                // Adjust filter visibility on desktop
+                if (window.innerWidth >= 768) {
+                    document.querySelectorAll('.filter-accordion').forEach(accordion => {
+                        accordion.classList.add('open');
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
