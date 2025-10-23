@@ -3,300 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether-Pro Wireless Headphones - Details</title>
-    <!-- Load Tailwind CSS -->
+    <title>SABR Textile | Product Details - Kaftan 01</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide icons (for clean UI icons) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Custom font setup */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #1a1a1a;
         }
-        /* Custom styles for smoother quantity input */
-        .quantity-btn {
-            @apply flex items-center justify-center h-10 w-10 text-xl font-bold transition duration-150 ease-in-out bg-white hover:bg-gray-100 text-gray-700 rounded-lg shadow-sm border border-gray-200 cursor-pointer;
+        .text-accent-gold { color: #d99a4e; }
+        .bg-accent-gold { background-color: #d99a4e; }
+        .border-accent-gold { border-color: #d99a4e; }
+        .bg-primary-dark { background-color: #1a1a1a; }
+        .text-primary-dark { color: #1a1a1a; }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
         }
-        .quantity-input {
-            -moz-appearance: textfield; /* Firefox */
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+
+        /* Sidebar */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .sidebar-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Product Image Gallery */
+        .thumbnail.active {
+            border-color: #d99a4e;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Product Detail Container -->
-    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-10 p-6 sm:p-8">
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <aside id="utility-sidebar" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 p-6 sidebar overflow-y-auto">
+        <div class="flex justify-end mb-8">
+            <button id="close-sidebar-btn">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600 hover:text-black"></i>
+            </button>
+        </div>
+        <nav class="space-y-6">
+            <a href="#" class="block text-lg font-medium text-gray-700 hover:text-black">Home</a>
+            <div>
+                <button id="mobile-shop-toggle" class="w-full flex justify-between items-center text-lg font-medium text-gray-700 hover:text-black">
+                    <span>Shop</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                </button>
+                <div id="mobile-shop-menu" class="pl-4 mt-2 space-y-2 hidden">
+                    <h4 class="font-bold text-primary-dark mb-2 text-sm uppercase">Clothing</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="clothes.html" class="hover:text-accent-gold block">All Clothing</a></li>
+                        <li><a href="clothes.html" class="hover:text-accent-gold block">Kaftan</a></li>
+                        <li><a href="clothes.html" class="hover:text-accent-gold block">Agbada</a></li>
+                    </ul>
+                    <h4 class="font-bold text-primary-dark mb-2 mt-4 text-sm uppercase">Caps</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="caps.html" class="hover:text-accent-gold block">All Caps</a></li>
+                        <li><a href="caps.html" class="hover:text-accent-gold block">Dara Caps</a></li>
+                        <li><a href="caps.html" class="hover:text-accent-gold block">Hausa Caps</a></li>
+                    </ul>
+                </div>
+            </div>
+            <a href="contact.html" class="block text-lg font-medium text-gray-700 hover:text-black">Contact Us</a>
 
-                <!-- 1. Image Gallery Section (Left Side on Desktop) -->
-                <div class="lg:sticky lg:top-8 mb-8 lg:mb-0">
-                    <!-- Main Image Display -->
-                    <div class="w-full aspect-square bg-gray-100 rounded-xl overflow-hidden mb-4 shadow-lg">
-                        <img id="main-product-image"
-                             src="https://placehold.co/800x800/262626/ffffff?text=Cosmic+Black+Headphones"
-                             alt="Main product image of Aether-Pro Wireless Headphones in Cosmic Black"
-                             class="w-full h-full object-cover transition duration-300 ease-in-out transform hover:scale-105"
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x800/ccc/333?text=Image+Load+Error';"
-                        >
-                    </div>
+            <div class="border-t pt-6">
+                <a href="account.html" class="block text-lg font-medium text-gray-700 hover:text-black">My Account</a>
+                <a href="login.html" class="block text-lg font-medium text-gray-700 hover:text-black">Login</a>
+            </div>
+            <div class="border-t pt-6">
+                <h3 class="text-sm font-semibold uppercase text-gray-500 mb-3">Currency</h3>
+                <ul>
+                    <li class="flex justify-between items-center text-gray-800 font-medium">
+                        NGN - Nigerian Naira
+                        <i data-lucide="check" class="w-5 h-5 text-accent-gold"></i>
+                    </li>
+                    <li class="flex justify-between items-center text-gray-800 font-medium">
+                        USD - United State Dollar
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
 
-                    <!-- Thumbnail Selector -->
-                    <div id="thumbnail-gallery" class="flex space-x-3 overflow-x-auto pb-2">
-                        <!-- Thumbnail 1 (Cosmic Black) -->
-                        <div class="w-20 h-20 flex-shrink-0 rounded-lg border-2 border-indigo-600 p-0.5 cursor-pointer thumbnail-item"
-                             data-image-src="https://placehold.co/800x800/262626/ffffff?text=Cosmic+Black+Headphones"
-                             data-alt="Cosmic Black"
-                             data-color="Cosmic Black">
-                            <img src="https://placehold.co/80x80/262626/ffffff?text=Black" alt="Thumbnail of Cosmic Black" class="w-full h-full object-cover rounded-md">
-                        </div>
+    <header class="sticky top-0 bg-white/95 backdrop-blur-sm shadow-sm z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold tracking-wider uppercase text-primary-dark">SABR Textile</a>
 
-                        <!-- Thumbnail 2 (Lunar White) -->
-                        <div class="w-20 h-20 flex-shrink-0 rounded-lg border-2 border-transparent hover:border-indigo-600 p-0.5 cursor-pointer thumbnail-item"
-                             data-image-src="https://placehold.co/800x800/f3f4f6/333333?text=Lunar+White+Headphones"
-                             data-alt="Lunar White"
-                             data-color="Lunar White">
-                            <img src="https://placehold.co/80x80/f3f4f6/333333?text=White" alt="Thumbnail of Lunar White" class="w-full h-full object-cover rounded-md">
-                        </div>
-
-                        <!-- Thumbnail 3 (Nebula Blue) -->
-                        <div class="w-20 h-20 flex-shrink-0 rounded-lg border-2 border-transparent hover:border-indigo-600 p-0.5 cursor-pointer thumbnail-item"
-                             data-image-src="https://placehold.co/800x800/374151/ffffff?text=Nebula+Blue+Headphones"
-                             data-alt="Nebula Blue"
-                             data-color="Nebula Blue">
-                            <img src="https://placehold.co/80x80/374151/ffffff?text=Blue" alt="Thumbnail of Nebula Blue" class="w-full h-full object-cover rounded-md">
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium uppercase tracking-wider">
+                <a href="index.html" class="text-gray-600 hover:text-black">Home</a>
+                <div class="relative group">
+                    <a href="shop.html" class="text-gray-600 hover:text-black flex items-center">
+                        Shop <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 mt-4 w-96 shadow-2xl bg-white border border-gray-100 rounded-lg p-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-primary-dark mb-3">Clothing</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li><a href="clothes.html" class="hover:text-accent-gold">All Clothing</a></li>
+                                    <li><a href="clothes.html" class="hover:text-accent-gold">Kaftan</a></li>
+                                    <li><a href="clothes.html" class="hover:text-accent-gold">Agbada</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary-dark mb-3">Caps</h4>
+                                <ul class="space-y-2 text-sm text-gray-600">
+                                    <li><a href="caps.html" class="hover:text-accent-gold">All Caps</a></li>
+                                    <li><a href="caps.html" class="hover:text-accent-gold">Dara</a></li>
+                                    <li><a href="caps.html" class="hover:text-accent-gold">Zannah</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <a href="contact.html" class="text-gray-600 hover:text-black">Contact Us</a>
+            </nav>
 
-                <!-- 2. Product Details Section (Right Side on Desktop) -->
-                <div class="lg:pt-0">
-                    <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Aether-Pro Wireless Headphones</h1>
-                    <p class="text-xl font-medium text-indigo-600 mb-4">Noise Cancellation Mastered.</p>
+            <div class="flex items-center space-x-6">
+                <a href="#" class="text-green-500 hover:text-green-600">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </a>
+                <a href="cart.html" class="flex items-center text-gray-600 hover:text-black">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span class="ml-1 text-sm font-medium">(0)</span>
+                </a>
+                <button id="open-sidebar-btn" class="text-gray-600 hover:text-black">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-                    <!-- Rating and Review Count -->
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="flex items-center text-yellow-400">
-                            <!-- 5 Stars Icons -->
-                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-                            <i data-lucide="star-half" class="w-5 h-5 fill-current text-yellow-300"></i>
+    <main>
+        <section class="bg-gray-100 py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="text-sm font-medium text-gray-500">
+                    <ol class="list-none p-0 inline-flex">
+                        <li class="flex items-center">
+                            <a href="index.html" class="hover:text-accent-gold">Home</a>
+                            <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="shop.html" class="hover:text-accent-gold">Shop</a>
+                            <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+                        </li>
+                        <li class="text-primary-dark">Kaftan 01</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="py-12 md:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="flex flex-col-reverse md:flex-row gap-4">
+                    <div class="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto max-h-[600px] pb-2 md:pb-0">
+                        <img src="kaftan1.webp" alt="Kaftan 01 - Front" class="thumbnail w-24 h-24 object-cover rounded-md border border-gray-200 cursor-pointer active" onclick="changeMainImage(this)">
+                        <img src="kaftan11.webp" alt="Kaftan 01 - Side" class="thumbnail w-24 h-24 object-cover rounded-md border border-gray-200 cursor-pointer" onclick="changeMainImage(this)">
+                        <img src="kaftan1-detail.webp" alt="Kaftan 01 - Detail" class="thumbnail w-24 h-24 object-cover rounded-md border border-gray-200 cursor-pointer" onclick="changeMainImage(this)">
+                        <img src="kaftan1-model.webp" alt="Kaftan 01 - Model" class="thumbnail w-24 h-24 object-cover rounded-md border border-gray-200 cursor-pointer" onclick="changeMainImage(this)">
+                    </div>
+                    <div class="flex-grow">
+                        <img id="main-product-image" src="kaftan1.webp" alt="Kaftan 01" class="w-full h-auto object-cover rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-primary-dark mb-2">Kaftan 01</h1>
+                    <p class="text-2xl font-bold text-accent-gold mb-6">₦260,000</p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Crafted from premium 100% cotton fabric with intricate monogram stitches, this African senator kaftan embodies luxury and comfort. Perfect for any discerning gentleman.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <label for="size" class="block text-sm font-medium text-gray-700 mb-2">Size</label>
+                            <select id="size" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold sm:text-sm bg-white">
+                                <option>Please select</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                                <option>XXL</option>
+                            </select>
                         </div>
-                        <p class="text-gray-600 text-sm font-semibold">4.7 <span class="text-gray-400">(2,500 Reviews)</span></p>
-                    </div>
 
-                    <!-- Pricing -->
-                    <div class="mb-8 flex items-baseline space-x-3">
-                        <span class="text-4xl font-extrabold text-gray-900">$199.99</span>
-                        <span class="text-xl text-gray-400 line-through font-medium">$249.99</span>
-                        <span class="text-lg font-bold text-red-600 px-3 py-1 bg-red-100 rounded-full">20% OFF</span>
-                    </div>
-
-                    <!-- Color/Variant Selection -->
-                    <div class="mb-8">
-                        <p class="text-lg font-semibold text-gray-700 mb-3">Color: <span id="selected-color" class="font-bold text-gray-900">Cosmic Black</span></p>
-                        <div class="flex space-x-4">
-                            <!-- Color 1: Black -->
-                            <button data-color="Cosmic Black" data-image-index="0" class="color-option w-10 h-10 rounded-full border-4 border-transparent ring-2 ring-indigo-600 bg-gray-900 transition duration-150 ease-in-out hover:ring-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-300"></button>
-                            <!-- Color 2: White -->
-                            <button data-color="Lunar White" data-image-index="1" class="color-option w-10 h-10 rounded-full border-4 border-transparent hover:ring-2 hover:ring-indigo-600 bg-gray-200 transition duration-150 ease-in-out focus:outline-none focus:ring-4 focus:ring-indigo-300"></button>
-                            <!-- Color 3: Blue -->
-                            <button data-color="Nebula Blue" data-image-index="2" class="color-option w-10 h-10 rounded-full border-4 border-transparent hover:ring-2 hover:ring-indigo-600 bg-slate-700 transition duration-150 ease-in-out focus:outline-none focus:ring-4 focus:ring-indigo-300"></button>
+                        <div>
+                            <label for="color" class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                            <select id="color" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-accent-gold focus:border-accent-gold sm:text-sm bg-white">
+                                <option>Please select</option>
+                                <option>Navy Blue</option>
+                                <option>Dark Grey</option>
+                                <option>Beige</option>
+                                <option>Brown</option>
+                            </select>
                         </div>
-                    </div>
 
-                    <!-- Quantity Selector -->
-                    <div class="mb-8">
-                        <label for="quantity" class="block text-lg font-semibold text-gray-700 mb-3">Quantity</label>
-                        <div class="flex items-center space-x-2">
-                            <button id="decrement-btn" class="quantity-btn" aria-label="Decrease quantity">
-                                <i data-lucide="minus" class="w-5 h-5"></i>
-                            </button>
-                            <input type="number" id="quantity-input" value="1" min="1" max="10"
-                                   class="quantity-input w-20 h-10 text-center text-lg font-medium border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
-                                   aria-live="polite" aria-atomic="true">
-                            <button id="increment-btn" class="quantity-btn" aria-label="Increase quantity">
-                                <i data-lucide="plus" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
-                        <button class="flex-1 px-8 py-3 text-lg font-bold text-white bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-indigo-300" onclick="addToCart()">
-                            <span class="flex items-center justify-center"><i data-lucide="shopping-bag" class="w-5 h-5 mr-2"></i> Add to Cart</span>
-                        </button>
-                        <button class="flex-1 px-8 py-3 text-lg font-bold text-indigo-600 border-2 border-indigo-600 rounded-xl hover:bg-indigo-50 transition duration-150 ease-in-out transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-indigo-300" onclick="buyNow()">
-                            <span class="flex items-center justify-center"><i data-lucide="wallet" class="w-5 h-5 mr-2"></i> Buy Now</span>
-                        </button>
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="pt-6 border-t border-gray-100">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Product Overview</h2>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            Experience silence like never before with the **Aether-Pro Wireless Headphones**. Engineered for audiophiles, these headphones feature proprietary **Adaptive Noise Cancellation** that flawlessly silences the world around you. Enjoy up to **50 hours of playback** on a single charge, customizable EQ profiles, and feather-light ergonomic comfort for all-day wear.
-                        </p>
-
-                        <!-- Key Features -->
-                        <div class="space-y-3 text-gray-700">
-                            <div class="flex items-start">
-                                <i data-lucide="volume-x" class="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1 mr-3"></i>
-                                <span>**Hybrid ANC:** Industry-leading noise reduction for deep focus.</span>
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                            <div class="flex items-center space-x-2">
+                                <button type="button" onclick="changeQuantity(-1)" class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100">-</button>
+                                <input type="text" id="quantity" value="1" min="1" class="w-16 text-center border border-gray-300 rounded-md shadow-sm sm:text-sm">
+                                <button type="button" onclick="changeQuantity(1)" class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100">+</button>
                             </div>
-                            <div class="flex items-start">
-                                <i data-lucide="battery-charging" class="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1 mr-3"></i>
-                                <span>**50-Hour Battery:** Power that lasts for cross-country flights and beyond.</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i data-lucide="bluetooth" class="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1 mr-3"></i>
-                                <span>**Bluetooth 5.2:** Rock-solid connection and multi-device pairing.</span>
-                            </div>
                         </div>
                     </div>
+
+                    <button class="w-full bg-primary-dark text-white py-3 px-6 rounded-md font-semibold text-lg hover:bg-gray-800 transition flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 mr-3"></i> Add to Cart
+                    </button>
+
+                    <p class="text-sm text-gray-500 mt-6">Category: <a href="clothes.html" class="hover:text-accent-gold underline">Kaftan</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-primary-dark text-gray-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">SABR Textile</h3>
+                <p class="text-sm">Premium clothing brand in Northern Nigeria. We offer quality products from amazing caps, fabulous Kaftans to classy and comfortable shoes.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Customer Service</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="contact.html" class="hover:text-accent-gold">Help & Contact Us</a></li>
+                    <li><a href="shipping.html" class="hover:text-accent-gold">Shipping Policy</a></li>
+                    <li><a href="shipping.html" class="hover:text-accent-gold">Returns & Refunds</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="contact.html" class="hover:text-accent-gold">About Us</a></li>
+                    <li><a href="terms.html" class="hover:text-accent-gold">Terms & Conditions</a></li>
+                    <li><a href="policy.html" class="hover:text-accent-gold">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="facebook"></i></a>
+                    <a href="#" class="hover:text-accent-gold"><i data-lucide="twitter"></i></a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Message Box (Instead of alert()) -->
-    <div id="message-box" class="fixed inset-x-0 bottom-0 z-50 p-4 transform transition-all duration-300 translate-y-full opacity-0 pointer-events-none">
-        <div class="max-w-md mx-auto bg-green-600 text-white p-4 rounded-xl shadow-2xl flex items-center justify-between">
-            <span id="message-text" class="font-semibold"></span>
-            <button onclick="hideMessage()" class="text-white hover:text-green-200 transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+            &copy; 2025 Sabr Textile. All Rights Reserved.
         </div>
-    </div>
+    </footer>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
 
-        // --- Data and State Management ---
-        const imageElements = [
-            { src: "https://placehold.co/800x800/262626/ffffff?text=Cosmic+Black+Headphones", alt: "Cosmic Black" },
-            { src: "https://placehold.co/800x800/f3f4f6/333333?text=Lunar+White+Headphones", alt: "Lunar White" },
-            { src: "https://placehold.co/800x800/374151/ffffff?text=Nebula+Blue+Headphones", alt: "Nebula Blue" }
-        ];
+            // --- Sidebar Logic ---
+            const sidebar = document.getElementById('utility-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            const openBtn = document.getElementById('open-sidebar-btn');
+            const closeBtn = document.getElementById('close-sidebar-btn');
 
-        const mainImage = document.getElementById('main-product-image');
-        const colorOptions = document.querySelectorAll('.color-option');
-        const thumbnailItems = document.querySelectorAll('.thumbnail-item');
-        const selectedColorSpan = document.getElementById('selected-color');
+            const toggleSidebar = () => {
+                sidebar.classList.toggle('open');
+                backdrop.classList.toggle('hidden');
+            };
 
-        // --- Image Gallery Logic ---
+            openBtn.addEventListener('click', toggleSidebar);
+            closeBtn.addEventListener('click', toggleSidebar);
+            backdrop.addEventListener('click', toggleSidebar);
 
-        function updateMainImage(index, color) {
-            const data = imageElements[index];
-
-            // Update main image source and alt text
-            mainImage.src = data.src;
-            mainImage.alt = `Main product image of Aether-Pro Wireless Headphones in ${data.alt}`;
-            selectedColorSpan.textContent = color;
-
-            // Update active thumbnail border
-            thumbnailItems.forEach(item => item.classList.remove('border-indigo-600', 'border-2'));
-            thumbnailItems[index].classList.add('border-indigo-600', 'border-2');
-
-            // Update active color button ring
-            colorOptions.forEach(btn => btn.classList.remove('ring-2', 'ring-indigo-600'));
-            colorOptions[index].classList.add('ring-2', 'ring-indigo-600');
-        }
-
-        // Event listener for thumbnails
-        thumbnailItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                const color = item.getAttribute('data-color');
-                updateMainImage(index, color);
-            });
-        });
-
-        // Event listener for color buttons
-        colorOptions.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.getAttribute('data-image-index'));
-                const color = btn.getAttribute('data-color');
-                updateMainImage(index, color);
-            });
-        });
-
-        // --- Quantity Selector Logic ---
-        const quantityInput = document.getElementById('quantity-input');
-        const incrementBtn = document.getElementById('increment-btn');
-        const decrementBtn = document.getElementById('decrement-btn');
-        const maxQuantity = 10;
-        const minQuantity = 1;
-
-        incrementBtn.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < maxQuantity) {
-                quantityInput.value = currentValue + 1;
-            } else {
-                showMessage(`Maximum quantity is ${maxQuantity}.`, 'yellow');
+            // --- Mobile Shop Dropdown Logic ---
+            const mobileShopToggle = document.getElementById('mobile-shop-toggle');
+            const mobileShopMenu = document.getElementById('mobile-shop-menu');
+            if (mobileShopToggle && mobileShopMenu) {
+                mobileShopToggle.addEventListener('click', () => {
+                    mobileShopMenu.classList.toggle('hidden');
+                    mobileShopToggle.querySelector('i').classList.toggle('rotate-180');
+                });
             }
-        });
 
-        decrementBtn.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > minQuantity) {
-                quantityInput.value = currentValue - 1;
-            } else {
-                showMessage(`Minimum quantity is ${minQuantity}.`, 'yellow');
+            // --- Product Image Gallery Logic ---
+            const mainProductImage = document.getElementById('main-product-image');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            function changeMainImage(clickedThumbnail) {
+                mainProductImage.src = clickedThumbnail.src;
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                clickedThumbnail.classList.add('active');
             }
-        });
 
-        // Ensure manual input stays within bounds
-        quantityInput.addEventListener('change', (e) => {
-            let value = parseInt(e.target.value);
-            if (isNaN(value) || value < minQuantity) {
-                e.target.value = minQuantity;
-            } else if (value > maxQuantity) {
-                e.target.value = maxQuantity;
-                showMessage(`Quantity limited to ${maxQuantity}.`, 'yellow');
+            // --- Quantity Selector Logic ---
+            function changeQuantity(change) {
+                const quantityInput = document.getElementById('quantity');
+                let currentQuantity = parseInt(quantityInput.value);
+                let newQuantity = currentQuantity + change;
+                if (newQuantity < 1) newQuantity = 1; // Prevent quantity from going below 1
+                quantityInput.value = newQuantity;
             }
+
+            window.changeMainImage = changeMainImage; // Make accessible globally for onclick
+            window.changeQuantity = changeQuantity; // Make accessible globally for onclick
         });
-
-        // --- Message Box / Action Handlers ---
-
-        const messageBox = document.getElementById('message-box');
-        const messageText = document.getElementById('message-text');
-
-        function showMessage(text, type = 'green') {
-            const colorClass = type === 'yellow' ? 'bg-yellow-500' : 'bg-green-600';
-            messageBox.firstElementChild.className = `max-w-md mx-auto text-white p-4 rounded-xl shadow-2xl flex items-center justify-between ${colorClass}`;
-            messageText.textContent = text;
-            messageBox.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
-            messageBox.classList.add('translate-y-0', 'opacity-100');
-            setTimeout(hideMessage, 4000); // Hide after 4 seconds
-        }
-
-        function hideMessage() {
-            messageBox.classList.remove('translate-y-0', 'opacity-100');
-            messageBox.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
-        }
-
-        function getOrderDetails() {
-            const quantity = parseInt(quantityInput.value);
-            const color = selectedColorSpan.textContent;
-            return `${quantity} x Aether-Pro Headphones in ${color}`;
-        }
-
-        function addToCart() {
-            showMessage(`${getOrderDetails()} added to cart!`, 'green');
-        }
-
-        function buyNow() {
-            showMessage(`Proceeding to checkout with: ${getOrderDetails()}.`, 'green');
-        }
     </script>
-
 </body>
 </html>
