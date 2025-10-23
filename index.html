@@ -240,6 +240,11 @@
                 <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Products will be loaded here by JavaScript --></div>
             </div>
+              <!-- Desktop-only images -->
+  <div class="hidden lg:flex justify-center gap-8 mt-12">
+    <img src="sabr1.webp" alt="Trending Extra 1" class="w-1/3 rounded-lg shadow-lg hover:scale-105 transition">
+    <img src="sabr2.webp" alt="Trending Extra 2" class="w-1/3 rounded-lg shadow-lg hover:scale-105 transition">
+  </div>
         </section>
     </main>
 
@@ -383,10 +388,10 @@
             // --- Trending Products Logic ---
             const productsGrid = document.getElementById('products-grid');
             const products = [
-                { id: 'sabr-040', name: 'Wamball code 040', price: '260,000', img1: 'https://placehold.co/400x400/343a40/f8f9fa?text=Kaftan+040+A', img2: 'https://placehold.co/400x400/212529/f8f9fa?text=Kaftan+040+B' },
-                { id: 'sabr-042', name: 'Wamball code 042', price: '340,000', img1: 'https://placehold.co/400x400/2C3E50/ECF0F1?text=Kaftan+042+A', img2: 'https://placehold.co/400x400/1C2833/ECF0F1?text=Kaftan+042+B' },
-                { id: 'sabr-020', name: 'Wamball code 020', price: '210,000', img1: 'https://placehold.co/400x400/5D6D7E/EAECEE?text=Kaftan+020+A', img2: 'https://placehold.co/400x400/424949/EAECEE?text=Kaftan+020+B' },
-                { id: 'sabr-041', name: 'Wamball code 041', price: '340,000', img1: 'https://placehold.co/400x400/2C3E50/ECF0F1?text=Kaftan+041+A', img2: 'https://placehold.co/400x400/1C2833/ECF0F1?text=Kaftan+041+B' },
+                { id: 'sabr-040', name: 'kaftan 01', price: '₦260,000', img1: 'kaftan1.webp', img2: 'kaftan11.webp' },
+                { id: 'sabr-042', name: 'kaftan 02', price: '₦340,000', img1: 'kaftan2.webp', img2: 'kaftan22.webp' },
+                { id: 'sabr-020', name: 'Agbada 01', price: '₦210,000', img1: 'agbada1.webp', img2: 'agbada11.webp' },
+                { id: 'sabr-041', name: 'Agbada 02', price: '₦340,000', img1: 'agbada2.webp', img2: 'agbada22.webp' },
             ];
 
             function createProductCard(product) {
@@ -429,6 +434,7 @@
     </script>
 </body>
 </html>
+
 
 
 
